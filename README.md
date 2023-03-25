@@ -2,7 +2,7 @@
 
 # Requirements:
 - Python 3.11
-- Flask (run 'pip install Flask')
+- Flask (run 'pip install Flask' in your terminal)
 
 # Instructions:
 - In your terminal, navigate to the directory where you want to store your project (using the 'cd' command)
