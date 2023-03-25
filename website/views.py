@@ -6,7 +6,7 @@ from flask import Blueprint, redirect, render_template, request, flash, jsonify,
 import json
 import string
 
-from .response import answer_question, generate_image
+from .response import get_steps, generate_dalle,get_images
 import random
 
 # courseText
@@ -32,4 +32,8 @@ def generate_response():
     prompt = json.loads(request.data)
     promptText = prompt['text']
     print(promptText)
-    return jsonify({"resp": answer_question(promptText), "image_url": generate_image(promptText)})
+    image_dict = {}
+    steps =  get_steps(promptText)
+    dallE_steps = generate_dalle(steps)
+    image_links = get_images(dallE_steps)
+    return jsonify(dict(zip(steps,image_links)))
