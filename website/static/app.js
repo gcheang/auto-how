@@ -115,18 +115,21 @@ function addUserMessage() {
       //   h1.innerText = "Output:";
       h1.innerText = titleCase(prompt);
 
+
       // Add generated stuff
+      resp.forEach(element => {
       let p = document.createElement("p");
       p.classList.add("content-paragraphs");
-      p.innerText = resp["resp"];
+      p.innerText = element["resp"];
       inner_content.appendChild(h1);
       inner_content.appendChild(p);
-      if (resp["image_url"] !== "") {
+      if (element["image_url"] !== "") {
         let img = document.createElement("img");
-        img.src = resp["image_url"];
+        img.src = element["image_url"];
         img.classList.add("content-images");
         inner_content.appendChild(img);
       }
+      });
 
       // let user know response was generated
       let response = document.createElement("div");
