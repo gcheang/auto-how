@@ -6,7 +6,7 @@ Answers users question in the chat
 
 import openai
 import os
-openai.api_key = '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'        # YOUR API KEY GOES HERE (replace)
+openai.api_key = ''        # YOUR API KEY GOES HERE (replace)
 
 # In this function, you will accept a question from the user and generate a response using GPT
 def get_steps(userInput):
@@ -21,9 +21,8 @@ def get_steps(userInput):
                 temperature=0.1,
                 max_tokens=400,
                 top_p=0.95)
-        print("pre-split",chatgpt_response)
         response = chatgpt_response['choices'][0]['message']['content'].strip()
-        chatgpt_response = response.split("@@");
+        chatgpt_response = response.split("@@")
         chatgpt_response = [x for x in chatgpt_response if 'STEP' in x.upper()]
         return chatgpt_response
     except:
@@ -35,20 +34,22 @@ def generate_dalle(instructionsList):
     try:
         output_list = []
         for s in instructionsList:
-            text_prompt = "Make a good dall-e prompt for the following:" +s
+            text_prompt = f"Make a good dall-e prompt for the following: {s}"
+            print("prompt:", text_prompt)
             chatgpt_response = openai.ChatCompletion.create(
-                mode = "gpt-3.5-turbo",
-                messages = [{"role": "user", "content": text_prompt}],
-                temperature = 0.1,
-                max_tokens = 400,
+                model="gpt-3.5-turbo",
+                messages=[{"role": "user", "content": text_prompt}],
+                temperature=0.1,
+                max_tokens=400,
                 top_p=0.95)
             response = chatgpt_response['choices'][0]['message']['content'].strip()
             output_list.append(response)
-            print(output_list)
-            return output_list
-    except: 
+        print(output_list)
+        return output_list
+    except:
+        print("something went wrong")
         return ""
-     
+
 def get_images(imagePrompts):
     '''
     Takes in a list of image prompt strings and creates an array of Dall-E Generated image URLS
@@ -62,6 +63,7 @@ def get_images(imagePrompts):
                         size="256x256")
 
             image_url = image_object['data'][0]['url']
+            print("urls:",image_url)
             urls.append(image_url)
         return urls
     except:
