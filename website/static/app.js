@@ -117,19 +117,37 @@ function addUserMessage() {
 
 
       // Add generated stuff
-      resp.forEach(element => {
-      let p = document.createElement("p");
-      p.classList.add("content-paragraphs");
-      p.innerText = element["resp"];
-      inner_content.appendChild(h1);
-      inner_content.appendChild(p);
-      if (element["image_url"] !== "") {
-        let img = document.createElement("img");
-        img.src = element["image_url"];
-        img.classList.add("content-images");
+      for (const [description, url] of Object.entries(resp)) {
+        // Create a new image element
+        const img = document.createElement("img");
+
+        // Set the image source to the URL from the dictionary
+        img.src = url;
+
+        // Create a new paragraph element to display the description
+        const p = document.createElement("p");
+        p.textContent = description;
+
+        // Add the image and description to the container element
         inner_content.appendChild(img);
+        inner_content.appendChild(p);
       }
-      });
+
+      // let keys = Object.keys(resp);
+      // let values = Object.values(resp);
+      // for (let i = 0; i < keys.length; i++) {
+      //   let p = document.createElement("p");
+      //   p.classList.add("content-paragraphs");
+      //   p.innerText = keys[i];
+      //   inner_content.appendChild(h1);
+      //   inner_content.appendChild(p);
+      //   if (element["image_url"] !== "") {
+      //     let img = document.createElement("img");
+      //     img.src = values[i];
+      //     img.classList.add("content-images");
+      //     inner_content.appendChild(img);
+      //   }
+      // }
 
       // let user know response was generated
       let response = document.createElement("div");
