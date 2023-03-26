@@ -1,3 +1,9 @@
+Made from AMACSS-AI-Olympics-Template
+
+For AMACSS AI Olympics
+
+Group members: Abdullah, Hari, Daniel, Gigi
+
 # AMACSS-AI-Olympics-Template
 
 # Requirements:
